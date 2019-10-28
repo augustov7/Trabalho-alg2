@@ -13,7 +13,7 @@ void cadastra_cliente(cliente **client){
 	scanf(" %[^\n]",nome);
 	printf("\nInforme o CPF:");
 	scanf(" %[^\n]",cpf);
-	printf("\nInforme o ENDEREÇO:");
+	printf("\nInforme o ENDERECO:");
 	scanf(" %[^\n]",endereco);
 	printf("\nInforme o BAIRRO:");
 	scanf(" %[^\n]",bairro);
@@ -22,7 +22,15 @@ void cadastra_cliente(cliente **client){
 	printf("\nInforme o TELEFONE de Contato:");
 	scanf(" %[^\n]", telefone);
 
-	criarCliente(nome,cpf,endereco,bairro,cidade,telefone,client);
+
+	if (retorna_nome_cliente(cpf,client) != NULL )
+	{
+		puts("CLIENTE JA CADASTRADO!!!");
+		pausa();
+	}else{
+		criarCliente(nome,cpf,endereco,bairro,cidade,telefone,client);	
+	}
+	
 	
 }
 
@@ -63,15 +71,18 @@ void listar_cliente_nome(cliente **client){
 	printf("\nInforme o NOME:");
 	scanf(" %[^\n]",nome_pesquisado);
 
+	limpar();
+
 	puts("----------------------------------------");
 	puts("---------------CLIENTES-----------------");
 	puts("----------------------------------------\n");
 
+	
 	while(lst != NULL){
 		if (comparaString(nome_pesquisado,lst->nome)== 0){
 			printf("Nome: %s\n", lst->nome);
 			printf("CPF: %s\n", lst->cpf);
-			printf("ENDEREÇO: %s\n", lst->endereco);
+			printf("ENDEREcO: %s\n", lst->endereco);
 			printf("BAIRRO: %s\n", lst->bairro);
 			printf("CIDADE/ESTADO: %s\n", lst->cidade_estado);
 			printf("TELEFONE: %s\n", lst->telefone);
@@ -80,7 +91,9 @@ void listar_cliente_nome(cliente **client){
 
 		lst = lst->prox;
 	}
-	system("pause");
+	
+	
+	pausa();
 }
 
 int checarCpf(char cpf[], cliente **client){
@@ -102,7 +115,7 @@ void listar_cliente(cliente **client){
 
 	if (lst == NULL){
 		puts("nulo");
-		system("pause");
+		pausa();
 	}
 	while(lst != NULL){
 
@@ -110,13 +123,14 @@ void listar_cliente(cliente **client){
 		printf("descricao: %s\n", lst->cpf);
 		puts("------------------------------------");
 		lst = lst->prox;
-		system("pause");
+		pausa();
 	}
 }
 
-char* retorna_nome_cliente(char cpf[], cliente **client){
+char* retorna_nome_cliente(char *cpf, cliente **client){
 
-	produto *lst = *client;
+	cliente *lst;
+	lst = *client;
 
 	while(lst != NULL){
 

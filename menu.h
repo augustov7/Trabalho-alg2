@@ -2,7 +2,13 @@
 #include <string.h>
 #include <stdlib.h>
 #include <locale.h>
-#include <conio.h>
+/*#include <conio.h>*/
+
+#ifndef _WIN32
+	#include "getch.h" 
+#else
+	#include <conio.h>
+#endif 
 
 #define MAX_SIZE 30
 
@@ -27,7 +33,7 @@ typedef struct cliente{
 }cliente;
 
 typedef struct venda{
-	char codigo_produto[50];
+	char codigo_produto[10];
 	char cpf_cliente[14];
 	int quantidade_venda;
 	struct venda *prox;
@@ -43,9 +49,9 @@ int submenu3();
 
 int comparaString(char str1[], char str2[]);
 
-/* remover*/
+void pausa();
 
-void listar(produto **prod);
+void limpar();
 
 /* PRODUTO */
 
@@ -58,6 +64,12 @@ void pesquisar_por_descricao(produto **prod);
 produto* retornaProduto(char codProd[], produto **prod);
 
 void pesquisar_por_fornecedor(produto **prod);
+
+int criarProduto(char codprod[], char descricao[], char fornecedor[], char data_validade[], int quantidade, int preco,produto **prod);
+
+int recuperaProduto(produto **prod);
+
+void altera_quantidade_produto(produto **prod);
 
 /* CLIENTE */
 
@@ -82,6 +94,12 @@ void cadastra_venda(cliente **client,produto **prod, venda **compras);
 
 void buscar_vendas_por_cpf(venda **compras, produto **prod);
 
-char* retorna_nome_cliente(lst->cpf_cliente, client);
+char* retorna_nome_cliente(char *cpf_cliente,cliente **client);
 
 void buscar_vendas_por_codProd(venda **compras, cliente **client);
+
+int salvarVenda(venda **compras);
+
+int criarVenda(char codigo_produto[], char cpf_cliente[], int qtd, venda **lst_compras);
+
+int recuperaVenda(venda **compras);

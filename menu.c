@@ -1,18 +1,18 @@
-#include <stdio.h>
+/*#include <stdio.h>
 #include <stdlib.h>
 
-/*
+
 #ifndef _WIN32
-	#include "getch.h"  Biblioteca para linux 
+	#include "getch.h" 
 #else
-	#include <conio.h>  Biblioteca para windows 
+	#include <conio.h>
 #endif  */
 
-#include <conio.h> 
+#include "menu.h"
 
 int menu_principal(){
 	char op;
-	system("cls");
+	limpar();
 	printf("\n1 PRODUTO\n2 CLIENTE\n3 COMPRA \nS SAIR \n\nOPCAO: ");
 	op = getch();
 	return op;
@@ -20,15 +20,15 @@ int menu_principal(){
 
 int submenu1(){
 	char op;
-	system("cls");
-	printf("\n1 PESQUISAR POR DESCRICAO \n2 PESQUISAR POR FORNECEDOR \n3 CADASTRAR PRODUTO \n0 Voltar \n\nOPCAO: ");
+	limpar();
+	printf("\n1 PESQUISAR POR DESCRICAO \n2 PESQUISAR POR FORNECEDOR \n3 CADASTRAR PRODUTO \n4 ATUALIZAR A QUANTIDADE DO PRODUTO \n0 Voltar \n\nOPCAO: ");
 	op = getch();
 	return op;
 }
 
 int submenu2(){
 	char op;
-	system("cls");
+	limpar();
 	printf("\n1 PESQUISAR POR NOME \n2 CADASTRAR CLIENTE \n0 Voltar \n\nOPCAO: ");
 	op = getch();
 	return op;

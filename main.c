@@ -5,6 +5,8 @@ CD C:\Users\Augusto\Desktop\Trabalho alg2
 
 gcc *.c -o trab.exe -ansi -pedantic -Wall 
 
+gcc *.c -o trab.exe -pedantic -Wall 
+
 main.c
 */
 
@@ -24,7 +26,8 @@ int main(){
 
 
 	recuperaCliente(&client);
-
+	recuperaProduto(&prod);
+	recuperaVenda(&compras);
 
 	op = menu_principal();
 
@@ -39,8 +42,7 @@ int main(){
 
 						/* PESQUISAR PRODUTO POR DESCRIÇÃO */
 					case '1':
-
-							//listar(&prod);
+					
 					pesquisar_por_descricao(&prod);
 
 					break;
@@ -56,6 +58,12 @@ int main(){
 					case '3':
 
 					cadastrar_produto(&prod);
+
+					break;
+
+					case '4':
+
+					altera_quantidade_produto(&prod);
 
 					break;
 					default:
@@ -114,7 +122,6 @@ int main(){
 					case '3':
 
 					cadastra_venda(&client, &prod, &compras);
-					system("pause");
 
 					break;
 					default:
@@ -132,6 +139,8 @@ int main(){
 
 	salvarCliente(&client);
 	salvarProduto(&prod);
+	salvarVenda(&compras);
+
 	printf("\n");
 
 	return 0;
